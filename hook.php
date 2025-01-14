@@ -443,6 +443,18 @@ function plugin_formcreator_hook_add_ticket(CommonDBTM $item) {
    ]);
 }
 
+function plugin_formcreator_hook_update_ticket_actors(CommonITILActor $item) {
+   if ($item::$itemtype_1 == Ticket::class) {
+      if ($item->fields['type'] == CommonITILActor::REQUESTER) {
+         $ticket_id = $item->fields['tickets_id'];
+         $ticket = new Ticket();
+         if ($ticket->getFromDB($ticket_id)) {
+            plugin_formcreator_hook_update_ticket($ticket);
+         }
+      }
+   }
+}
+
 function plugin_formcreator_hook_update_ticket(CommonDBTM $item) {
    global $DB;
 
@@ -490,6 +502,7 @@ function plugin_formcreator_hook_update_ticket(CommonDBTM $item) {
          'entities_id'        => $item->fields['entities_id'],
          'is_recursive'       => '0',
          'requester_id'       => $requester,
+         'users_id_recipient' => $requester,
          'comment'            => $DB->escape($item->fields['content']),
       ]);
    }

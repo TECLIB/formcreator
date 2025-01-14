@@ -281,6 +281,7 @@ function plugin_formcreator_permanent_hook(): void {
    $PLUGIN_HOOKS[Hooks::ITEM_ADD]['formcreator'] = [
       Ticket::class => 'plugin_formcreator_hook_add_ticket',
       ITILFollowup::class => 'plugin_formcreator_hook_update_itilFollowup',
+      Ticket_User::class => 'plugin_formcreator_hook_update_ticket_actors',
    ];
    $PLUGIN_HOOKS[Hooks::PRE_ITEM_UPDATE]['formcreator'] = [
       User::class  => 'plugin_formcreator_hook_update_user',
@@ -299,6 +300,7 @@ function plugin_formcreator_permanent_hook(): void {
    $PLUGIN_HOOKS[Hooks::ITEM_PURGE]['formcreator'] = [
       Ticket::class => 'plugin_formcreator_hook_purge_ticket',
       TicketValidation::class => 'plugin_formcreator_hook_purge_ticketvalidation',
+      Ticket_User::class => 'plugin_formcreator_hook_update_ticket_actors',
    ];
    $PLUGIN_HOOKS[Hooks::PRE_ITEM_PURGE]['formcreator'] = [
       PluginFormcreatorTargetTicket::class => 'plugin_formcreator_hook_pre_purge_targetTicket',
